@@ -1,0 +1,6 @@
+body.login{
+     background:url(images/bgimage.png) repeat;
+}
+.login h1 a {
+    background:url(images/logo.png) no-repeat;
+}
