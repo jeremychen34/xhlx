@@ -21,9 +21,47 @@ function change_panels(new_index){
 	$('.services_buttons li:nth-child('+(new_index+1)+')').addClass('active');
 }
 
-	//ajax contact
+	//form authrize
+$().ready(function(){	
+	// 姓名验证
+	jQuery.validator.addMethod("isName", function(value, element){
+	  var length = value.length;
+	  return this.optional(element)||(length >=2);
+	},"*姓名至少两个字");
+	// 手机号码验证
+	jQuery.validator.addMethod("isPhone", function(value, element){
+	  var length = value.length;
+	  return this.optional(element)||(length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
+	},"*请正确填写您的手机号码");
+
+	$("#formid").validate({
+		rules:{
+			fullname:{
+				required:true,
+				isName:true
+			},
+			phone:{
+		        required:true,
+		        isPhone:true
+      				}
+      		},
+		messages:{
+			fullname:{
+				required:"*请输入姓名"
+				},
+			phone:{
+				required:"*请输入手机号码"
+					}
+				},
+			remote:"send.php"
+	});
+
+});
+	
+	// ajax contact
 	var checkclick = false;   //检查是否提交过
-	function to(){
+	$.validator.setDefaults({
+	submitHandler: function to(){
 		if(checkclick){
 			$('#send').html('请不要重复提交！');
 		}else{
@@ -47,6 +85,7 @@ function change_panels(new_index){
 		};
 		return false;	
 	}
+});
 
 var map = '';
 

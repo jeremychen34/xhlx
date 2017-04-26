@@ -35,6 +35,7 @@
   <![endif]-->
     <!-- JavaScripts -->
   <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.validate.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <!-- <script src="js/jquery.form.min.js"></script> -->
   <script src="js/jquery.singlePageNav.js"></script>
@@ -380,30 +381,30 @@
         <div class="row">
           <div class="col col-md-5 col-sm-12"><h1>联系我们</h1></div>
           <div class="col col-md-7 col-sm-12 col-xs-12 center-row" id="contact_content">
-            <form role="form" id="formid" method="POST" onsubmit = "return to();" class="center">
+            <form role="form" id="formid" action="" class="" method="POST" onsubmit="return to();" class="center">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input name="fullname" type="text" class="form-control" id="input_name" placeholder="Name..." required oninvalid="setCustomValidity('请输入您的姓名');" oninput="setCustomValidity('');">
+                    <input name="fullname" type="text" class="form-control" id="fullname" placeholder="Name..."/>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input name="email" type="email" class="form-control" id="input_email" placeholder="Email..." required oninvalid="setCustomValidity('请输入您的电子邮箱地址');" oninput="setCustomValidity('');">
+                    <input name="phone" type="tel" class="form-control" id="phone" placeholder="Phone..."/>
                   </div>                
                 </div> 
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <textarea name="message" rows="3" class="form-control" id="input_message" placeholder="Message..." required oninvalid="setCustomValidity('请输入您的留言信息'');" oninput="setCustomValidity('');"></textarea><br>
+                    <textarea name="message" rows="3" class="form-control" id="input_message" placeholder="Message..."/></textarea><br>
                     <button id="submit" type="submit" class="btn btn-primary pull-right">SEND</button>
-                    <p id="ready" style="display:none">正在发送……</p>
-                    <p id="send"></p> 
+                    <label id="ready" style="display:none">正在发送……</label>
+                    <label id="send"></label> 
                   </div>
                 </div>
               </div> <!-- row -->
-            </form>          
+            </form>  
           </div>
         </div>
       </div>
