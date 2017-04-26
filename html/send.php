@@ -1,7 +1,7 @@
     <?PHP
     //引入PHPMailer的核心文件 使用require_once包含避免出现PHPMailer类重复定义的警告
     $name = $_POST["fullname"];
-    $email = $_POST["email"];
+    $phone = $_POST["phone"];
     $message = $_POST["message"];
     require_once("phpmailer/class.phpmailer.php"); 
     require_once("phpmailer/class.smtp.php"); 
@@ -46,7 +46,7 @@
     //添加该邮件的主题
     $mail->Subject = '学禾网站发送的邮件';
     //添加邮件正文 上方将isHTML设置成了true，则可以是完整的html字符串 如：使用file_get_contents函数读取本地的html文件
-    $mail->Body = "姓名：$name</br>邮箱：$email</br>留言：$message";
+    $mail->Body = "姓名：$name</br>邮箱：$phone</br>留言：$message";
     //为该邮件添加附件 该方法也有两个参数 第一个参数为附件存放的目录（相对目录、或绝对目录均可） 第二参数为在邮件附件中该附件的名称
     //$mail->addAttachment('','');
     //同样该方法可以多次调用 上传多个附件
@@ -58,10 +58,20 @@
     $status = $mail->send();
 
      
-    //简单的判断与提示信息
+    //存入本地数据库
     if($status) {
-     echo '发送邮件成功';
-    }else{
-     echo '发送邮件失败，错误信息未：'.$mail->ErrorInfo;
+      $conn = mysqli_connect('localhost', 'root', '65310336','web');
+      if ($conn->connect_error) {
+            die("连接失败:".$conn->connect_error);
+        } 
+
+      $sql = "INSERT INTO Users (username,phone,message) VALUES ('{$name}','{$phone}','{$message}')";
+              
+      if ($conn->query($sql) === true) {
+            echo "新记录插入成功";
+        } else {
+            echo "Error:".$sql."<br>".$conn->error;
+        }
     }
+    $conn->close();
     ?>
