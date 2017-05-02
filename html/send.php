@@ -60,7 +60,8 @@
      
     //存入本地数据库
     if($status) {
-      $conn = mysqli_connect('localhost', 'root', '65310336','web');
+      $conn = mysqli_connect('localhost', 'xhlx', 'xhlx','web');
+      $conn->query("set names utf8");
       if ($conn->connect_error) {
             die("连接失败:".$conn->connect_error);
         } 
